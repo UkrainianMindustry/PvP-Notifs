@@ -52,21 +52,21 @@ function getConstructingBlock(tile){
 var eventid = 0;
 
 function eventLogInfo(team,message){
-	queue.add("E-"+eventid+" Team "+chatTeamColor(team)+team.name+"[white] "+message);
+	queue.add("E-"+eventid+" Команда "+chatTeamColor(team)+team.name+"[white] "+message);
 	eventid++;
 }
 function eventLogBlock(team,block,tile){
 	if(!tile){
 		return;
 	}
-	queue.add("E-"+eventid+" Team "+chatTeamColor(team)+team.name+"[white] has placed:"+ block.localizedName+ toBlockEmoji(block)+" at ["+ tile.x+","+tile.y+"]");
+	queue.add("E-"+eventid+" Команда "+chatTeamColor(team)+team.name+"[white] розмістила:"+ block.localizedName+ toBlockEmoji(block)+" at ["+ tile.x+","+tile.y+"]");
 	eventid++;
 }
 function eventLog(team,tile){
 	if(!tile){
 		return;
 	}
-	queue.add("E-"+eventid+" Team "+chatTeamColor(team)+team.name+"[white] has placed:"+ getConstructingBlock(tile).localizedName+ " at ["+ tile.x+","+tile.y+"]");
+	queue.add("E-"+eventid+" Команда "+chatTeamColor(team)+team.name+"[white] розмістила:"+ getConstructingBlock(tile).localizedName+ " at ["+ tile.x+","+tile.y+"]");
 	eventid++;
 }
 
@@ -206,11 +206,11 @@ const TeamAchievement={
 		print(unit.name);
 		if(!this.units){
 			this.units = Seq.with(unit);
-			eventLogInfo(this.team,"has started making "+unit.localizedName+toBlockEmoji(unit));
+			eventLogInfo(this.team, "розпочала створення "+unit.localizedName+toBlockEmoji(unit));
 		}
 		if(!this.units.contains(unit)){
 			this.units.add(unit);
-			eventLogInfo(this.team,"has started making "+unit.localizedName+toBlockEmoji(unit));
+			eventLogInfo(this.team, "розпочала створення "+unit.localizedName+toBlockEmoji(unit));
 		}
 	}
 	
@@ -430,9 +430,9 @@ Events.on(EventType.BlockDestroyEvent, cons(e => {
 	var tile = e.tile;
 	if(tile.build instanceof CoreBlock.CoreBuild){
 		if(tile.team()== Vars.player.team()){
-			queue.add("[red]!!Core at ["+tile.x+","+tile.y+"] was lost!!");
+			queue.add("[red]!!Ядро ["+tile.x+","+tile.y+"] було втрачено!!");
 		}else{
-			eventLogInfo(tile.team(),"has lost a core at ["+tile.x+","+tile.y+"]");
+			eventLogInfo(tile.team(),"втратили ядро ["+tile.x+","+tile.y+"]");
 		}
 	}
 	if(tile.team()== Vars.player.team()){
@@ -508,27 +508,27 @@ cons(e => {
 	pipicon = Core.atlas.find("pvpnotifs-pip");
 	addTrackHandler(BlockTrackHandler.new("graphite",BlockBuildTracker, Blocks.graphitePress,false,{
 		"customText": function(team,block,tile){
-			return "has started graphite production "+toBlockEmoji(block)+""+toBlockEmoji(Items.graphite);
+			return "розпочав виробництво графіту "+toBlockEmoji(block)+""+toBlockEmoji(Items.graphite);
 		}
 	} ));
 	addTrackHandler(BlockTrackHandler.new("silicon",BlockBuildTracker, Blocks.siliconSmelter,false,{
 		"customText": function(team,block,tile){
-			return "has started silicon production "+toBlockEmoji(block)+""+toBlockEmoji(Items.silicon);
+			return  "розпочав виробництво кремнію "+toBlockEmoji(block)+""+toBlockEmoji(Items.silicon);
 		}
 	}));
 	addTrackHandler(BlockTrackHandler.new("plast",BlockBuildTracker, Blocks.plastaniumCompressor,false,{
 		"customText": function(team,block,tile){
-			return "has started plastanium production "+toBlockEmoji(block)+""+toBlockEmoji(Items.plastanium);
+			return  "розпочав виробництво пластанію "+toBlockEmoji(block)+""+toBlockEmoji(Items.plastanium);
 		}
 	}));
 	addTrackHandler(BlockTrackHandler.new("phase",BlockBuildTracker, Blocks.phaseWeaver,false,{
 		"customText": function(team,block,tile){
-			return "has started phase production "+toBlockEmoji(block)+""+toBlockEmoji(Items.phaseFabric);
+			return  "розпочав виробництво фазової тканини "+toBlockEmoji(block)+""+toBlockEmoji(Items.phaseFabric);
 		}
 	}));
 	addTrackHandler(BlockTrackHandler.new("surge",BlockBuildTracker, Blocks.surgeSmelter,false,{
 		"customText": function(team,block,tile){
-			return "has started surge production "+toBlockEmoji(block)+""+toBlockEmoji(Items.surgeAlloy);
+			return  "розпочав виробництво вибухової суміші "+toBlockEmoji(block)+""+toBlockEmoji(Items.surgeAlloy);
 		}
 	}));
 	addTrackHandler(BlockTrackHandler.new("foreshadow",BlockBuildTracker, Blocks.foreshadow,false,{}));
@@ -567,7 +567,7 @@ cons(e => {
 		if(e2 instanceof Reconstructor){
 			addTrackHandler(BlockTrackHandler.new(e2.name,BlockBuildTracker, e2,false,{
 				"customText": function(team,block,tile){
-					return "can now make Tier-"+Math.round((block.size+1)*0.5)+" units" + toBlockEmoji(block);
+					return "тепер може робити одиниці "+Math.round((block.size+1)*0.5)+"-го рівня" + toBlockEmoji(block);
 				}
 			}));
 			
@@ -598,7 +598,7 @@ cons(e => {
 	});
 	var titaniumevent = {
 		"customText": function(team,block,tile){
-			return "has started titanium production "+toBlockEmoji(block)+""+toBlockEmoji(Items.titanium);
+			return "розпочав виробництво титану "+toBlockEmoji(block)+""+toBlockEmoji(Items.titanium);
 		},
 		"buildfilter":function(build){
 			return build.dominantItem == Items.titanium;
@@ -606,7 +606,7 @@ cons(e => {
 	};
 	var thoriumevent = {
 		"customText": function(team,block,tile){
-			return "has started thorium production "+toBlockEmoji(block)+""+toBlockEmoji(Items.thorium);
+			return "розпочав виробництво торію "+toBlockEmoji(block)+""+toBlockEmoji(Items.thorium);
 		},
 		"buildfilter":function(build){
 			return build.dominantItem == Items.thorium;
@@ -745,46 +745,46 @@ cons(e => {
 		let style = Styles.clearTransi;
 		t.button(new TextureRegionDrawable(rangeicon), togglestyle, run(()=>{
 			viewAirRange=!viewAirRange;
-		})).update(b => b.setChecked(viewAirRange)).width(46).height(46).name("airrange").tooltip("view air turret range");
+		})).update(b => b.setChecked(viewAirRange)).width(46).height(46).name("airrange").tooltip("показати радіус дії повітряних башт");
 		
 		t.button(new TextureRegionDrawable(rangeicon2), togglestyle, run(()=>{
 			viewGroundRange=!viewGroundRange;
-		})).update(b => b.setChecked(viewGroundRange)).width(46).height(46).name("groundrange").tooltip("view ground turret range");
+		})).update(b => b.setChecked(viewGroundRange)).width(46).height(46).name("groundrange").tooltip("показати радіус дії наземних башт");
 		
 		t.button(new TextureRegionDrawable(rangeammoicon), togglestyle, run(()=>{
 			ignoreNoAmmo=!ignoreNoAmmo;
-		})).update(b => b.setChecked(ignoreNoAmmo)).width(46).height(46).name("ammorange").tooltip("ignore turrets without ammo");
+		})).update(b => b.setChecked(ignoreNoAmmo)).width(46).height(46).name("ammorange").tooltip("Ігнорувати башти без боєприпасів.");
 		
 		t.row();
 		t.button(Icon.units, style, run(()=>{
 			onChat("Xelo","units")
-		})).width(46).height(46).name("units").tooltip("count enemy units");
+		})).width(46).height(46).name("units").tooltip("Порахувати кількість одиниць.");
 		
 		t.button(new TextureRegionDrawable(progressicon), togglestyle, run(()=>{
 			viewprogress=!viewprogress;
-		})).update(b => b.setChecked(viewprogress)).width(46).height(46).name("progress").tooltip("show progress bar on unit factories");
+		})).update(b => b.setChecked(viewprogress)).width(46).height(46).name("progress").tooltip("Показати шкалу прогресу на заводах з виробництва одиниць.");
 		
 		t.button(Icon.units, togglestyle, run(()=>{
 			stealUnit=!stealUnit;
-		})).update(b => b.setChecked(stealUnit)).width(46).height(46).name("stealunit").tooltip("control nearby unit as soon as it exits factory");
+		})).update(b => b.setChecked(stealUnit)).width(46).height(46).name("stealunit").tooltip("Взяти під контроль якомога швидше найближчу одиницю, коли вона вийде з фабрики.");
 		
 		t.row();
 		t.button(new TextureRegionDrawable(oreicon), togglestyle, run(()=>{
 			orescan=!orescan;
-		})).update(b => b.setChecked(orescan)).width(46).height(46).name("ores").tooltip("show covered ores");
+		})).update(b => b.setChecked(orescan)).width(46).height(46).name("ores").tooltip("Показати покриті руди.");
 		t.button(Icon.eyeSmall, togglestyle, run(()=>{
 			Vars.enableLight=!Vars.enableLight;
-		})).update(b => b.setChecked(orescan)).width(46).height(46).name("light").tooltip("toggle lighting");
+		})).update(b => b.setChecked(orescan)).width(46).height(46).name("light").tooltip("Увімкнути/Вимкнути світіння.");
 		t.button(new TextureRegionDrawable(pipbuttonicon), togglestyle, run(()=>{
 			showpips=!showpips;
-		})).update(b => b.setChecked(showpips)).width(46).height(46).name("light").tooltip("show pips");
+		})).update(b => b.setChecked(showpips)).width(46).height(46).name("light").tooltip("Показати труби.");
 		t.row();
 		t.button(Icon.refresh, style, run(()=>{
 			Call.sendChatMessage("/sync");
-		})).width(46).height(46).name("ores").tooltip("sync");
+		})).width(46).height(46).name("ores").tooltip("Синхронізуватися з сервером.");
 		t.button(new TextureRegionDrawable(votekick), style, run(()=>{
 			Call.sendChatMessage("/vote y");
-		})).width(46).height(46).name("ores").tooltip("vote y");
+		})).width(46).height(46).name("ores").tooltip("Проголосувати за вигнання з сервера.");
 		
 		t.button(Icon.terminal, togglestyle, run(()=>{
 			if(playerAI){
@@ -793,7 +793,7 @@ cons(e => {
 				playerAI = new BuilderAI();
 				playerAI.unit(Vars.player.unit());
 			}
-		})).update(b => b.setChecked(!!playerAI)).width(46).height(46).name("ores").tooltip("become gamma Ai");
+		})).update(b => b.setChecked(!!playerAI)).width(46).height(46).name("ores").tooltip("Стати ШІ Гамми.");
 		
 		t.top().right().marginTop(180);
 		//Icon.units
@@ -808,7 +808,7 @@ cons(e => {
 			}
 			let imgbutton = t.button(Icon.paste, style, run(()=>{
 				useSchematic(Core.settings.getString(i+"-schem"));
-			})).update(b => b.setDisabled(!Core.settings.getString(i+"-schem"))).width(width).height(width).name("ores").tooltip("use Schem "+i).get();
+			})).update(b => b.setDisabled(!Core.settings.getString(i+"-schem"))).width(width).height(width).name("ores").tooltip("Використати схему "+i+".").get();
 			imgbutton.getImage().setScaling(Scaling.stretch);
 			imgbutton.getImage().setSize(width*0.8,width*0.8);
 			imgbutton.resizeImage(width*0.8);
@@ -1037,7 +1037,7 @@ Events.run(Trigger.update, () => {
 	anticommandspam.each(t =>{
 		t.timer+=Time.delta;
 		if(t.timer>600){
-			eventLogInfo(t.team,"has issued command to attack.");
+			eventLogInfo(t.team,"видала наказ атакувати.");
 			t.timer=-1;
 		}
 	});
@@ -1061,7 +1061,7 @@ Events.run(Trigger.update, () => {
 		enabled = false;
 		update();
 		while(!queue.isEmpty()){
-			Vars.ui.chatfrag.addMessage("[red]PvP-Alerts: "+queue.pop());
+			Vars.ui.chatfrag.addMessage("[red]PvP-сповіщення: "+queue.pop());
 		}
 		enabled = be;
 		wasCleared = false;
@@ -1076,7 +1076,7 @@ Events.run(Trigger.update, () => {
 					queue.add("[green]Attempting to grab a "+unit.type.localizedName+"...")
 					lookingForUnit=unit.type;
 				}else{
-					print(unit+" spawned too far ("+(dist/8)+" blocks away)");
+					print(unit+" з'явився занадто далеко ("+(dist/8)+" блоків)");
 					print(Vars.player.unit().x+","+Vars.player.unit().y+"|"+unit.x+","+unit.y);
 				}
 			}
@@ -1098,12 +1098,6 @@ Events.run(Trigger.update, () => {
 	}
 	if(glitch){
 		let mv = Vars.control.input.movement;
-		/*
-		
-		if(mv.len()>0.1 && delayglitch>20){
-			Vars.netClient.setPosition(Vars.player.unit().x+mv.x*10,Vars.player.unit().y+mv.y*10);
-			delayglitch=0;
-		}*/
 		Vars.player.unit().vel.x=mv.x*10;
 		Vars.player.unit().vel.y=mv.y*10;
 	}
@@ -1150,7 +1144,7 @@ function update(){
 				prevsent=0;
 			}
 		}else{
-			Vars.ui.chatfrag.addMessage("[red]PvP-Alerts: "+queue.pop());
+			Vars.ui.chatfrag.addMessage("[red]PvP-сповіщення: "+queue.pop());
 		}
 		
 	}	
@@ -1177,7 +1171,7 @@ function clear(){
 	if(teams){
 		teams.clear();
 	}
-	log("debug","cleared all.");
+	log("debug","очищено все.");
 	
 	Vars.world.tiles.each((x,y)=>{
 		var tile = Vars.world.tile(x,y);
@@ -1235,19 +1229,19 @@ const onChat = function(sender,message) {
 		var cmd = all[0];
 		switch(cmd){
 			case "help":
-				print("[red]PvP-Alerts [white]commands: [green]enable, disable, wipe, items, units, prefix");
+				print("[red][white]Команди[] PvP-сповіщення commands: [green]enable, disable, wipe, items, units, prefix");
 			break;
 			case "enable":
 				enabled = true;
-				print("[green]PvP-Alerts enabled");
+				print("[green]PvP-сповіщення увімкнено");
 			break;
 			case "disable":
 				enabled = false;
-				print("[red]Disabled PvP-alerts"); 
+				print("[red]PvP-сповіщення вимкнено"); 
 			break;
 			case "prefix":
 				prefix = all[1];
-				print("[cyan]Changed prefix to:[white]"+prefix); 
+				print("[cyan]Новий префікс: [white]"+prefix); 
 			break;
 			case "wipe":
 				clear();
@@ -1263,10 +1257,10 @@ const onChat = function(sender,message) {
 						if(f.length==0){
 							return;
 						}
-						f = "Team "+chatTeamColor(k)+k.name+"[white]'s items:"+f;
+						f = "[white]Предмети[] команди "+chatTeamColor(k)+k.name+":"+f;
 						queue.add(f);
 					});
-					queue.add("[cyan]Scanning enemy core items..");
+					queue.add("[cyan]Скануємо предмети ворожих ядер...");
 				}
 			break;
 			case "glitch":
@@ -1289,19 +1283,19 @@ const onChat = function(sender,message) {
 							}
 							units.get(unit.type).count++;
 						});
-						var f = (Vars.player.team() == team? "Your team":"Team "+chatTeamColor(team)+team.name+"[white]");
+						var f = (Vars.player.team() == team? "Ваша команда":"Команда "+chatTeamColor(team)+team.name+"[white]");
 						if(!units){
-							f += "[white] has no units currently";
+							f += "[white] не має наразі одиниць";
 						}else{
 							let uf = "";
 							units.each((type,countobj)=>{
 								uf+=toBlockEmoji(type)+":"+countobj.count+", "
 							});
-							f += "[white]'s units:"+uf;
+							f += "[white] одиниці:"+uf;
 						}
 						queue.add(f);
 					});
-					queue.add("[cyan]Counting enemy units..");
+					queue.add("[cyan]Підрахунок ворожих одиниць...");
 				}
 			break;
 		}
@@ -1309,7 +1303,5 @@ const onChat = function(sender,message) {
 };
 
 global.alerts.onChat = function(msg){onChat("Xelo",msg);};
-
-
 
 
