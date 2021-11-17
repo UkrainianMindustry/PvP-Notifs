@@ -59,14 +59,14 @@ function eventLogBlock(team,block,tile){
 	if(!tile){
 		return;
 	}
-	queue.add("E-"+eventid+" Команда "+chatTeamColor(team)+team.name+"[white] розмістила:"+ block.localizedName+ toBlockEmoji(block)+" at ["+ tile.x+","+tile.y+"]");
+	queue.add("E-"+eventid+" Команда "+chatTeamColor(team)+team.name+"[white] розмістила: "+ block.localizedName+ toBlockEmoji(block)+" на координатах ["+ tile.x+","+tile.y+"]");
 	eventid++;
 }
 function eventLog(team,tile){
 	if(!tile){
 		return;
 	}
-	queue.add("E-"+eventid+" Команда "+chatTeamColor(team)+team.name+"[white] розмістила:"+ getConstructingBlock(tile).localizedName+ " at ["+ tile.x+","+tile.y+"]");
+	queue.add("E-"+eventid+" Команда "+chatTeamColor(team)+team.name+"[white] розмістила: "+ getConstructingBlock(tile).localizedName+ " на координатах ["+ tile.x+","+tile.y+"]");
 	eventid++;
 }
 
@@ -508,27 +508,27 @@ cons(e => {
 	pipicon = Core.atlas.find("pvpnotifs-pip");
 	addTrackHandler(BlockTrackHandler.new("graphite",BlockBuildTracker, Blocks.graphitePress,false,{
 		"customText": function(team,block,tile){
-			return "розпочав виробництво графіту "+toBlockEmoji(block)+""+toBlockEmoji(Items.graphite);
+			return "розпочала виробництво графіту "+toBlockEmoji(block)+""+toBlockEmoji(Items.graphite);
 		}
 	} ));
 	addTrackHandler(BlockTrackHandler.new("silicon",BlockBuildTracker, Blocks.siliconSmelter,false,{
 		"customText": function(team,block,tile){
-			return  "розпочав виробництво кремнію "+toBlockEmoji(block)+""+toBlockEmoji(Items.silicon);
+			return  "розпочала виробництво кремнію "+toBlockEmoji(block)+""+toBlockEmoji(Items.silicon);
 		}
 	}));
 	addTrackHandler(BlockTrackHandler.new("plast",BlockBuildTracker, Blocks.plastaniumCompressor,false,{
 		"customText": function(team,block,tile){
-			return  "розпочав виробництво пластанію "+toBlockEmoji(block)+""+toBlockEmoji(Items.plastanium);
+			return  "розпочала виробництво пластанію "+toBlockEmoji(block)+""+toBlockEmoji(Items.plastanium);
 		}
 	}));
 	addTrackHandler(BlockTrackHandler.new("phase",BlockBuildTracker, Blocks.phaseWeaver,false,{
 		"customText": function(team,block,tile){
-			return  "розпочав виробництво фазової тканини "+toBlockEmoji(block)+""+toBlockEmoji(Items.phaseFabric);
+			return  "розпочала виробництво фазової тканини "+toBlockEmoji(block)+""+toBlockEmoji(Items.phaseFabric);
 		}
 	}));
 	addTrackHandler(BlockTrackHandler.new("surge",BlockBuildTracker, Blocks.surgeSmelter,false,{
 		"customText": function(team,block,tile){
-			return  "розпочав виробництво вибухової суміші "+toBlockEmoji(block)+""+toBlockEmoji(Items.surgeAlloy);
+			return  "розпочала виробництво вибухової суміші "+toBlockEmoji(block)+""+toBlockEmoji(Items.surgeAlloy);
 		}
 	}));
 	addTrackHandler(BlockTrackHandler.new("foreshadow",BlockBuildTracker, Blocks.foreshadow,false,{}));
