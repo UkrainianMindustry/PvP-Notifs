@@ -432,7 +432,7 @@ Events.on(EventType.BlockDestroyEvent, cons(e => {
 		if(tile.team()== Vars.player.team()){
 			queue.add("[red]!!Ядро ["+tile.x+","+tile.y+"] було втрачено!!");
 		}else{
-			eventLogInfo(tile.team(),"втратили ядро ["+tile.x+","+tile.y+"]");
+			eventLogInfo(tile.team(),"втратила ядро ["+tile.x+","+tile.y+"]");
 		}
 	}
 	if(tile.team()== Vars.player.team()){
@@ -598,7 +598,7 @@ cons(e => {
 	});
 	var titaniumevent = {
 		"customText": function(team,block,tile){
-			return "розпочав виробництво титану "+toBlockEmoji(block)+""+toBlockEmoji(Items.titanium);
+			return "розпочала виробництво титану "+toBlockEmoji(block)+""+toBlockEmoji(Items.titanium);
 		},
 		"buildfilter":function(build){
 			return build.dominantItem == Items.titanium;
@@ -606,7 +606,7 @@ cons(e => {
 	};
 	var thoriumevent = {
 		"customText": function(team,block,tile){
-			return "розпочав виробництво торію "+toBlockEmoji(block)+""+toBlockEmoji(Items.thorium);
+			return "розпочала виробництво торію "+toBlockEmoji(block)+""+toBlockEmoji(Items.thorium);
 		},
 		"buildfilter":function(build){
 			return build.dominantItem == Items.thorium;
